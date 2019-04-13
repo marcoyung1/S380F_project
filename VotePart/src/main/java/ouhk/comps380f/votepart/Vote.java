@@ -6,11 +6,14 @@
 package ouhk.comps380f.votepart;
 
 import java.io.Serializable;
+import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -134,24 +137,28 @@ public class Vote implements Serializable {
         }
     }
 
-    public String voteResult() throws ClassNotFoundException, SQLException {
+    public List<String> voteResult() throws ClassNotFoundException, SQLException {
         Class.forName("org.apache.derby.jdbc.ClientDriver");
         //String url = "jdbc:derby://localhost:1527/group_project;create=true;user=nbuser;password=nbuser";
         Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/group_project", "nbuser", "nbuser");
 
-        PreparedStatement ps = conn.prepareStatement("Select answer, count(answer) From Vote Where questionID = ? Group By answer");
-        ps.setInt(1, questionId);//hardcode of questionID
+        PreparedStatement ps = conn.prepareStatement("Select D.QUESTION,V.Answer, Count(Answer) From Vote V,QuestionDB D Where D.QuestionId = V.QuestionId  Group By V.Answer,D.QUESTION Order by D.Question");
+        //ps.setInt(1, questionId);//hardcode of questionID
         ResultSet rs = ps.executeQuery();
+        List<String> result = new ArrayList<>();
 
         while (rs.next()) {
-            String ans = rs.getString(1);
-            String count = rs.getString(2);
-            return "Question: :" +questionId+ "<br />\n" + "Answer " + ans + ": " + count;
+            String question = rs.getString(1);
+            String ans = rs.getString(2);
+            int ansCount = rs.getInt(3);
+            
+            result.add("Question: " +question+ "<br />\n" + "Answer " + ans + ": " + ansCount) ;
         }
 
         rs.close();
         conn.close();
-        return null;
+        return result;
+        
     }
 
     public String questionGen() throws ClassNotFoundException, SQLException {

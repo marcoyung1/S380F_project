@@ -9,10 +9,11 @@
         <h1>Hello World!</h1>
         <jsp:useBean id="myVote" scope="session" class="ouhk.comps380f.votepart.Vote" />
         <a href="<c:url value="/create"/>">Create Question</a><br />
-        
-        <a href="<c:url value="/vote"/>"> Question '1' </a><br />
-        <a href="<c:url value="/vote"/>"> Question '2'</a><br />
-        <a href="<c:url value="/result"/>">Question'0' Vote Result </a><br />
-        
+
+        <jsp:setProperty name="myVote" property="questionId" value="2" />
+        <a href="<c:url value="/vote"/>">  Question '2' </a><br />        
+
+
+        <a href="<c:url value="/result"/>">Vote Result</a><br />
     </body>
 </html>
