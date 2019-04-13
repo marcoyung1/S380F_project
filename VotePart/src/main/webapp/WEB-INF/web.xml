@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>EditServlet</servlet-name>
+        <servlet-class>ouhk.comps380f.votepart.EditServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VoteServlet</servlet-name>
+        <servlet-class>ouhk.comps380f.votepart.VoteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateServlet</servlet-name>
+        <servlet-class>ouhk.comps380f.votepart.CreateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResultServlet</servlet-name>
+        <servlet-class>ouhk.comps380f.servlet.ResultServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditServlet</servlet-name>
+        <url-pattern>/EditServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VoteServlet</servlet-name>
+        <url-pattern>/VoteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateServlet</servlet-name>
+        <url-pattern>/CreateServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResultServlet</servlet-name>
+        <url-pattern>/ResultServlet</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
